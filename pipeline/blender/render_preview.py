@@ -41,6 +41,7 @@ def parse_args():
     ap.add_argument("--angles", help="comma-separated view angles in degrees; overrides --views")
     ap.add_argument("--cull", action="store_true",
                     help="hide back faces, as a game engine does; inside-out triangles then show as holes")
+    ap.add_argument("--transparent", action="store_true", help="transparent background, for figures")
     ap.add_argument("--top", type=float, help="frame only this top fraction of the model's height")
     ap.add_argument("--pbr", action="store_true",
                     help="render the file's metallic/roughness as authored; by default only base colour is shown, "
@@ -126,6 +127,9 @@ def main():
         scene.display.shading.light = "STUDIO"
     scene.render.resolution_x = scene.render.resolution_y = args.size
     scene.render.image_settings.file_format = "PNG"
+    if args.transparent:
+        scene.render.film_transparent = True
+        scene.render.image_settings.color_mode = "RGBA"
     scene.view_settings.view_transform = "Standard"
 
     fov = 2 * math.atan(cam_data.sensor_width / (2 * cam_data.lens))

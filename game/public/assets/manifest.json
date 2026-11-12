@@ -208,7 +208,13 @@
     "type": "equirect"
   },
   "music": {
-    "field": "audio/field.ogg",
-    "combat": "audio/combat.ogg"
+    "field": [
+      "audio/field.ogg",
+      "audio/field.mp3"
+    ],
+    "combat": [
+      "audio/combat.ogg",
+      "audio/combat.mp3"
+    ]
   }
 }

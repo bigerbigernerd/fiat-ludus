@@ -11,15 +11,9 @@ enemies, props, sky and music all came out of it. Everything here ran on an RTX
 2080 Ti (2018, 11 GB). A cheaper card of the same size class should work; a larger
 one is only faster.
 
-```
- prompt ─▶ Krea 2 Turbo ─▶ concept image ─▶ TRELLIS.2 ─▶ textured mesh ─▶ Blender (headless) ─▶ game asset
-                                                              │
-                                             hero only:  face projection ─▶ UniRig + retargeted clips
- prompt ─▶ YuE2 ─▶ looping instrumental track
-                                                              ▼
-                                         three.js game (toon shading, outline, grass, water)
-                                         + a headless browser test that plays it to the end
-```
+![The pipeline: text prompt, concept image, textured mesh, clean-up, face projection and rigging for the hero, music, and the three.js game with its play-through test](docs/figures/pipeline.png)
+
+<sub>The thumbnails are real outputs of each stage. Vector versions: [SVG](docs/figures/pipeline.svg), [PDF](docs/figures/pipeline.pdf); source: [make_pipeline_figure.py](docs/figures/make_pipeline_figure.py).</sub>
 
 ## What is in the box
 
