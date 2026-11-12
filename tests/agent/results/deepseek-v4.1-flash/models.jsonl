@@ -1,0 +1,7 @@
+# 3D settings for the autumn make-over. One JSON object per line; read by
+# pipeline/image_to_3d.py --batch. Faces are the game's per-copy budgets
+# (game/README.md); install decimates further where the manifest asks.
+{"id": "hero", "image": "assets/concepts/out/hero.png", "resolution": 1536, "faces": 20000, "texture_size": 2048, "seed": 78, "remesh": "on", "note": "character: one closed skin for skinning, big texture for the face"}
+{"id": "mossling", "image": "assets/concepts/out/mossling.png", "faces": 4000, "seed": 79}
+{"id": "tree_broadleaf", "image": "assets/concepts/out/tree_broadleaf.png", "faces": 2500, "seed": 80}
+{"id": "pumpkin", "image": "assets/concepts/out/pumpkin.png", "faces": 1500, "seed": 81}

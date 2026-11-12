@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+# forge: one entry point for every stage of the pipeline.
+#
+#   ./forge images  <concepts.jsonl> [--out-dir DIR] [gen_image.py options]
+#   ./forge models  <models.jsonl>   [--out-dir DIR] [--only id,id] [image_to_3d.py options]
+#   ./forge review  <models-dir>     [--concepts DIR] [--out sheet.jpg] [--only id,id]
+#   ./forge face    <in.glb> <concept.png> <out.glb> [project_image.py options]
+#   ./forge rig     <mesh.glb> <out.glb> [--height M] [rig.py options]
+#   ./forge clean   <in.glb> <out.glb> [--height M] [--faces N] [clean_asset.py options]
+#   ./forge preview <in.glb> <out.png> [render_preview.py options]
+#   ./forge install [--from DIR] [--manifest FILE] [--only id,id]
+#   ./forge music   --prompt "..." --out file.ogg [make_bgm.py options]
+#   ./forge check                      # build the game and run its browser test
+#   ./forge cost                       # what every GPU job so far cost
+#
+#   ./forge bg <name> <command ...>    # run any of the above in the background, log to logs/<name>.log
+#   ./forge wait <name> [seconds]      # wait up to N seconds (default 100) and say whether it finished
+#
+# GPU stages run on $FORGE_GPU_MAIN (set it in .env.local; default 0), one job per
+# GPU at a time, and each job appends a line to cost/ledger.jsonl.
+# Every command prints one JSON line last and exits non-zero on failure.
+set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
+. ./env.sh
+
+gpu="$FORGE_GPU_MAIN"
+py() { printf '%s' "$FORGE_RUNTIME/envs/$1/bin/python"; }
+need() { [ -e "$1" ] || { echo "forge: missing $1 ($2)" >&2; exit 2; }; }
+blender() {
+    need "${FORGE_BLENDER:-/nonexistent}" "Blender; see docs/setup.md"
+    "$FORGE_BLENDER" -b --factory-startup --python-exit-code 1 --python "$1" -- "${@:2}" 2>&1 |
+        grep -v -e '^$' -e '^Blender ' -e 'INFO:' -e '^Fra:' -e "^Saved: " -e '^ Time: ' -e 'WARNING: More than one shader node tex image'
+}
+label() { basename "${1%.*}"; }
+
+cmd="${1:-help}"
+[ $# -gt 0 ] && shift
+
+case "$cmd" in
+images)
+    need "$(py krea)" "image environment"
+    batch="$1"; shift
+    out="assets/concepts/out"
+    if [ "${1:-}" = "--out-dir" ]; then out="$2"; shift 2; fi
+    tools/gpu_run.sh image "$(label "$batch")" --gpu "$gpu" -- \
+        "$(py krea)" pipeline/gen_image.py --batch "$batch" --out-dir "$out" --skip-existing "$@"
+    ;;
+models)
+    need "$(py trellis2)" "image-to-3D environment"
+    batch="$1"; shift
+    out="assets/models/raw"
+    if [ "${1:-}" = "--out-dir" ]; then out="$2"; shift 2; fi
+    tools/gpu_run.sh image_to_3d "$(label "$batch")" --gpu "$gpu" -- \
+        "$(py trellis2)" pipeline/image_to_3d.py --batch "$batch" --out-dir "$out" \
+        --resolution 1024 --flat-material --skip-existing "$@"
+    ;;
+review)
+    dir="$1"; shift
+    concepts="assets/concepts/out"; out="$dir/_review.jpg"; extra=()
+    while [ $# -gt 0 ]; do
+        case "$1" in
+        --concepts) concepts="$2"; shift 2 ;;
+        --out) out="$2"; shift 2 ;;
+        *) extra+=("$1"); shift ;;
+        esac
+    done
+    "$(py krea)" tools/review_models.py --models "$dir" --concepts "$concepts" --out "$out" "${extra[@]}"
+    ;;
+face)
+    blender pipeline/blender/project_image.py --in "$1" --image "$2" --out "$3" "${@:4}"
+    ;;
+rig)
+    python3 pipeline/rig.py --mesh "$1" --out "$2" --gpu "$gpu" "${@:3}"
+    ;;
+clean)
+    blender pipeline/blender/clean_asset.py --in "$1" --out "$2" "${@:3}"
+    ;;
+preview)
+    blender pipeline/blender/render_preview.py --in "$1" --out "$2" "${@:3}"
+    ;;
+install)
+    python3 pipeline/install_assets.py "$@"
+    ;;
+music)
+    need "$(py yue2)" "music environment"
+    name="bgm"
+    for ((i = 1; i <= $#; i++)); do
+        if [ "${!i}" = "--out" ]; then j=$((i + 1)); name="$(label "${!j}")"; fi
+    done
+    tools/gpu_run.sh bgm "$name" --gpu "$gpu" -- "$(py yue2)" pipeline/make_bgm.py "$@"
+    ;;
+check)
+    cd game
+    [ -d node_modules ] || npm install
+    npm run check
+    ;;
+cost)
+    python3 tools/cost_report.py "$@"
+    ;;
+bg)
+    # Image, model and music jobs take minutes; an agent's shell tool usually gives up
+    # after two. Start the job detached, then poll it with `./forge wait`.
+    name="$1"; shift
+    mkdir -p logs
+    if [ -f "logs/$name.pid" ] && kill -0 "$(cat "logs/$name.pid")" 2>/dev/null; then
+        echo "{\"stage\": \"bg\", \"name\": \"$name\", \"error\": \"a job with this name is still running\"}"
+        exit 2
+    fi
+    rm -f "logs/$name.exit"
+    nohup setsid bash -c '"$0" "${@:2}" > "logs/$1.log" 2>&1; echo $? > "logs/$1.exit"' \
+        "$FORGE_ROOT/forge" "$name" "$@" > /dev/null 2>&1 < /dev/null &
+    echo $! > "logs/$name.pid"
+    echo "{\"stage\": \"bg\", \"name\": \"$name\", \"log\": \"logs/$name.log\", \"next\": \"./forge wait $name\"}"
+    ;;
+wait)
+    name="$1"; limit="${2:-100}"
+    [ -f "logs/$name.pid" ] || { echo "forge: no background job named '$name'" >&2; exit 2; }
+    for ((i = 0; i < limit; i++)); do
+        [ -f "logs/$name.exit" ] && break
+        kill -0 "$(cat "logs/$name.pid")" 2>/dev/null || { sleep 1; break; }
+        sleep 1
+    done
+    # The job's own last JSON line (if it has printed one) and where it is now.
+    tr '\r' '\n' < "logs/$name.log" | grep -v '^$' | tail -n 3 | cut -c1-1500
+    if [ -f "logs/$name.exit" ]; then
+        code="$(cat "logs/$name.exit")"
+        echo "{\"stage\": \"wait\", \"name\": \"$name\", \"state\": \"finished\", \"exit\": $code}"
+        exit "$code"
+    fi
+    echo "{\"stage\": \"wait\", \"name\": \"$name\", \"state\": \"running\", \"next\": \"./forge wait $name\"}"
+    ;;
+help | -h | --help)
+    awk 'NR > 1 && /^#/ { sub(/^# ?/, ""); print; next } NR > 1 { exit }' "${BASH_SOURCE[0]}"
+    ;;
+*)
+    echo "forge: unknown command '$cmd' (try ./forge help)" >&2
+    exit 2
+    ;;
+esac

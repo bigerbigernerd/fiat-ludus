@@ -1,0 +1,28 @@
+# machine-local settings and secrets
+.env.local
+.env
+
+# generated while working; the finished assets live in game/public/assets
+assets/_smoke/
+assets/models/raw*/
+assets/models/try*/
+assets/models/work/
+assets/models/rigged/
+assets/concepts/hero-v2/
+assets/concepts/archive/
+/logs/
+
+# game build and test output
+game/node_modules/
+game/dist/
+game/check-output/
+
+# Python
+__pycache__/
+*.pyc
+
+# lab notes that are not part of the release
+docs/notion-pending/
+
+# screenshots of third-party posts collected for the write-up
+docs/research/screens/

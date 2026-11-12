@@ -1,0 +1,14 @@
+{
+  "id": "mossling",
+  "model": "krea/Krea-2-Turbo",
+  "prompt": "A round boulder creature covered in soft green moss, two small stubby stone feet, two glowing amber eyes, a small leaf sprout on top of its head, a grumpy but cute expression, no arms. A single small game creature, centered, the whole creature in frame with margin, three-quarter front view, stylized cel-shaded adventure game art, hand-painted, chunky simple shapes, flat warm colours with soft painted gradients, clean readable silhouette, plain white background, even soft studio lighting, no ground, no cast shadow, no text",
+  "seed": 5,
+  "steps": 8,
+  "width": 1024,
+  "height": 1024,
+  "memory": "gguf",
+  "dtype": "fp16",
+  "gguf": "krea2_turbo-Q4_K_M.gguf",
+  "denoise_seconds": 25.65,
+  "decode_seconds": 4.45
+}

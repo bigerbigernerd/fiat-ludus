@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "hero": {
+    "file": "models/hero.glb",
+    "height": 1.75,
+    "facing": "+z",
+    "clips": {
+      "idle": "idle",
+      "walk": "walk",
+      "run": "run",
+      "jump": "jump",
+      "attack": "attack"
+    },
+    "attachments": [
+      {
+        "id": "sword",
+        "file": "models/sword.glb",
+        "bone": "DEF-hand.R",
+        "length": 0.75,
+        "grip": 0.18,
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "offset": [
+          0,
+          0.08,
+          0.02
+        ],
+        "triangles": 800
+      }
+    ]
+  },
+  "enemies": {
+    "mossling": {
+      "file": "models/mossling.glb",
+      "height": 0.9,
+      "triangles": 2500,
+      "facing": "+z"
+    }
+  },
+  "props": {
+    "tree_broadleaf": {
+      "file": "models/tree_broadleaf.glb",
+      "height": 6.0,
+      "triangles": 1000,
+      "collider": {
+        "type": "cylinder",
+        "radius": 0.45
+      }
+    },
+    "tree_pine": {
+      "file": "models/tree_pine.glb",
+      "height": 7.0,
+      "triangles": 1000,
+      "collider": {
+        "type": "cylinder",
+        "radius": 0.4
+      }
+    },
+    "rock_large": {
+      "file": "models/rock_large.glb",
+      "height": 1.8,
+      "triangles": 600,
+      "collider": {
+        "type": "cylinder",
+        "radius": 1.1
+      }
+    },
+    "rock_small": {
+      "file": "models/rock_small.glb",
+      "height": 0.7,
+      "triangles": 400,
+      "collider": {
+        "type": "cylinder",
+        "radius": 0.4
+      }
+    },
+    "bush": {
+      "file": "models/bush.glb",
+      "height": 1.1,
+      "triangles": 500,
+      "collider": {
+        "type": "none"
+      }
+    },
+    "flowers": {
+      "file": "models/flowers.glb",
+      "height": 0.5,
+      "triangles": 150,
+      "collider": {
+        "type": "none"
+      }
+    },
+    "ruin_pillar": {
+      "file": "models/ruin_pillar.glb",
+      "height": 3.0,
+      "triangles": 3000,
+      "collider": {
+        "type": "cylinder",
+        "radius": 0.45
+      }
+    },
+    "ruin_arch": {
+      "file": "models/ruin_arch.glb",
+      "height": 4.0,
+      "triangles": 3000,
+      "collider": [
+        {
+          "type": "box",
+          "x": -1.5,
+          "z": 0,
+          "width": 0.8,
+          "depth": 0.8
+        },
+        {
+          "type": "box",
+          "x": 1.5,
+          "z": 0,
+          "width": 0.8,
+          "depth": 0.8
+        }
+      ]
+    },
+    "fence": {
+      "file": "models/fence.glb",
+      "height": 1.0,
+      "triangles": 1500,
+      "collider": {
+        "type": "box",
+        "width": 2.4,
+        "depth": 0.25
+      }
+    },
+    "signpost": {
+      "file": "models/signpost.glb",
+      "height": 1.8,
+      "triangles": 1500,
+      "collider": {
+        "type": "cylinder",
+        "radius": 0.15
+      }
+    },
+    "crate": {
+      "file": "models/crate.glb",
+      "height": 0.8,
+      "triangles": 2000,
+      "collider": {
+        "type": "box",
+        "width": 0.8,
+        "depth": 0.8
+      }
+    },
+    "chest": {
+      "file": "models/chest.glb",
+      "height": 0.8,
+      "triangles": 3000,
+      "collider": {
+        "type": "box",
+        "width": 0.95,
+        "depth": 0.62
+      }
+    },
+    "lantern": {
+      "file": "models/lantern.glb",
+      "height": 2.2,
+      "triangles": 3000,
+      "collider": {
+        "type": "cylinder",
+        "radius": 0.6
+      }
+    },
+    "gate": {
+      "file": "models/gate.glb",
+      "height": 5.5,
+      "triangles": 3000,
+      "collider": [
+        {
+          "type": "box",
+          "x": -2.9,
+          "z": 0,
+          "width": 1.3,
+          "depth": 1.3
+        },
+        {
+          "type": "box",
+          "x": 2.9,
+          "z": 0,
+          "width": 1.3,
+          "depth": 1.3
+        }
+      ]
+    },
+    "gate_door": {
+      "file": "models/gate_door.glb",
+      "height": 4.3,
+      "triangles": 2000,
+      "collider": {
+        "type": "box",
+        "width": 2.3,
+        "depth": 0.45
+      }
+    }
+  },
+  "sky": {
+    "file": "textures/sky.jpg",
+    "type": "equirect"
+  },
+  "music": {
+    "field": "audio/field.ogg",
+    "combat": "audio/combat.ogg"
+  }
+}

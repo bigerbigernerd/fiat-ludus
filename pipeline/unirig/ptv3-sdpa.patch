@@ -1,0 +1,33 @@
+diff --git a/src/model/pointcept/models/PTv3Object.py b/src/model/pointcept/models/PTv3Object.py
+index 5006353..7bbe327 100644
+--- a/src/model/pointcept/models/PTv3Object.py
++++ b/src/model/pointcept/models/PTv3Object.py
+@@ -1,6 +1,7 @@
+ from functools import partial
+ from addict import Dict
+ import math
++import os
+ import torch
+ import torch.nn as nn
+ import spconv.pytorch as spconv
+@@ -207,7 +208,19 @@ class SerializedAttention(PointModule):
+         if self.enable_qknorm:
+             qkv = self.qknorm(qkv)
+ 
+-        if not self.enable_flash:
++        if not self.enable_flash and not self.enable_rpe and not self.upcast_attention \
++                and not self.training and os.environ.get("FORGE_PTV3_SDPA", "1") == "1":
++            # ai-game-forge patch: memory-efficient attention for GPUs without FlashAttention-2
++            # (Turing). Same fp16 maths as the flash path below, without materialising the
++            # (N', H, K, K) attention matrix (3 GiB on a 40k-triangle mesh).
++            q, k, v = (
++                qkv.reshape(-1, K, 3, H, C // H).permute(2, 0, 3, 1, 4).unbind(dim=0)
++            )
++            feat = torch.nn.functional.scaled_dot_product_attention(
++                q.half(), k.half(), v.half(), scale=self.scale
++            )
++            feat = feat.transpose(1, 2).reshape(-1, C).to(qkv.dtype)
++        elif not self.enable_flash:
+             # encode and reshape qkv: (N', K, 3, H, C') => (3, N', H, K, C')
+             q, k, v = (
+                 qkv.reshape(-1, K, 3, H, C // H).permute(2, 0, 3, 1, 4).unbind(dim=0)

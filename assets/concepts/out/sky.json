@@ -1,0 +1,14 @@
+{
+  "id": "sky",
+  "model": "krea/Krea-2-Turbo",
+  "prompt": "A bright late-morning sky, large soft cumulus clouds, light blue fading to pale turquoise near the horizon. Seamless equirectangular 360 degree sky panorama, horizon line exactly at the vertical middle, painterly cel-shaded clouds, soft gradients, no ground objects, no sun disc, no text",
+  "seed": 7,
+  "steps": 8,
+  "width": 2048,
+  "height": 1024,
+  "memory": "gguf",
+  "dtype": "fp16",
+  "gguf": "krea2_turbo-Q4_K_M.gguf",
+  "denoise_seconds": 51.29,
+  "decode_seconds": 9.11
+}

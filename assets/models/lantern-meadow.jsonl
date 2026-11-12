@@ -1,0 +1,22 @@
+# 3D settings for the demo game "Lantern Meadow". One JSON object per line; read by
+# pipeline/image_to_3d.py --batch. `image` is the concept image, `faces` the triangle
+# budget the game asks for (game/README.md), everything else is a TRELLIS.2 setting.
+# Missing keys take the command-line values of the batch run.
+{"id": "hero", "image": "assets/concepts/out/hero.png", "resolution": 1536, "faces": 20000, "texture_size": 2048, "seed": 42, "remesh": "on", "note": "character: one closed skin for skinning, big texture for the face"}
+{"id": "mossling", "image": "assets/concepts/out/mossling.png", "faces": 4000}
+{"id": "sword", "image": "assets/concepts/out/sword.png", "faces": 800}
+{"id": "tree_broadleaf", "image": "assets/concepts/out/tree_broadleaf.png", "faces": 2500}
+{"id": "tree_pine", "image": "assets/concepts/out/tree_pine.png", "faces": 2500}
+{"id": "rock_small", "image": "assets/concepts/out/rock_small.png", "faces": 1000}
+{"id": "rock_large", "image": "assets/concepts/out/rock_large.png", "faces": 1500}
+{"id": "bush", "image": "assets/concepts/out/bush.png", "faces": 1500}
+{"id": "flowers", "image": "assets/concepts/out/flowers.png", "faces": 400}
+{"id": "ruin_arch", "image": "assets/concepts/out/ruin_arch.png", "faces": 3000}
+{"id": "ruin_pillar", "image": "assets/concepts/out/ruin_pillar.png", "faces": 3000}
+{"id": "lantern", "image": "assets/concepts/out/lantern.png", "faces": 3000}
+{"id": "gate", "image": "assets/concepts/out/gate.png", "faces": 3000}
+{"id": "gate_door", "image": "assets/concepts/out/gate_door.png", "faces": 2000}
+{"id": "chest", "image": "assets/concepts/out/chest.png", "faces": 3000}
+{"id": "fence", "image": "assets/concepts/out/fence.png", "faces": 1500}
+{"id": "signpost", "image": "assets/concepts/out/signpost.png", "faces": 1500}
+{"id": "crate", "image": "assets/concepts/out/crate.png", "faces": 2000}

@@ -1,0 +1,395 @@
+{
+  "version": 1,
+  "seed": 20261112,
+  "terrain": {
+    "size": 120,
+    "resolution": 128,
+    "radius": 54,
+    "baseHeight": 1.3,
+    "noiseAmp": 0.7,
+    "features": [
+      {
+        "type": "hill",
+        "x": 8,
+        "z": -18,
+        "radius": 15,
+        "height": 5.5
+      },
+      {
+        "type": "hill",
+        "x": -30,
+        "z": -16,
+        "radius": 12,
+        "height": 2.5
+      },
+      {
+        "type": "plateau",
+        "x": 30,
+        "z": -24,
+        "radius": 9,
+        "height": 3.6,
+        "edge": 1.6,
+        "sx": 1.3
+      },
+      {
+        "type": "pond",
+        "x": 19,
+        "z": 24,
+        "radius": 7.5,
+        "depth": 2.8
+      }
+    ]
+  },
+  "player": {
+    "spawn": {
+      "x": 0,
+      "z": 40,
+      "yaw": 0
+    }
+  },
+  "lanterns": [
+    {
+      "id": "west",
+      "x": -30,
+      "z": 6
+    },
+    {
+      "id": "hill",
+      "x": 8,
+      "z": -18
+    },
+    {
+      "id": "east",
+      "x": 31,
+      "z": -2
+    }
+  ],
+  "gate": {
+    "x": 0,
+    "z": -38,
+    "rot": 0
+  },
+  "paths": [
+    [
+      [
+        0,
+        42
+      ],
+      [
+        1,
+        32
+      ],
+      [
+        -3,
+        22
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        5,
+        -2
+      ],
+      [
+        6,
+        -14
+      ]
+    ],
+    [
+      [
+        -3,
+        22
+      ],
+      [
+        -14,
+        14
+      ],
+      [
+        -26,
+        8
+      ]
+    ],
+    [
+      [
+        5,
+        -2
+      ],
+      [
+        17,
+        -1
+      ],
+      [
+        28,
+        -2
+      ]
+    ],
+    [
+      [
+        6,
+        -14
+      ],
+      [
+        3,
+        -26
+      ],
+      [
+        0,
+        -34
+      ]
+    ]
+  ],
+  "enemyGroups": [
+    {
+      "lantern": "west",
+      "type": "mossling",
+      "count": 3,
+      "radius": 3.6
+    },
+    {
+      "lantern": "hill",
+      "type": "mossling",
+      "count": 3,
+      "radius": 3.6
+    },
+    {
+      "lantern": "east",
+      "type": "mossling",
+      "count": 3,
+      "radius": 3.6
+    },
+    {
+      "lantern": null,
+      "type": "mossling",
+      "count": 2,
+      "radius": 1.6,
+      "x": -7,
+      "z": 18
+    }
+  ],
+  "props": [
+    {
+      "id": "signpost",
+      "x": 3.2,
+      "z": 34,
+      "rot": 0.3
+    },
+    {
+      "id": "crate",
+      "x": -3.2,
+      "z": 37.5,
+      "rot": 0.2
+    },
+    {
+      "id": "crate",
+      "x": -4.1,
+      "z": 36.3,
+      "rot": 0.9
+    },
+    {
+      "id": "crate",
+      "x": -3.6,
+      "z": 37.0,
+      "rot": 0.5,
+      "lift": 0.8
+    },
+    {
+      "id": "fence",
+      "x": 4.6,
+      "z": 30.5,
+      "rot": 1.35
+    },
+    {
+      "id": "fence",
+      "x": 4.2,
+      "z": 28.0,
+      "rot": 1.6
+    },
+    {
+      "id": "fence",
+      "x": -5.2,
+      "z": 30.0,
+      "rot": 1.5
+    },
+    {
+      "id": "chest",
+      "x": -20,
+      "z": 20,
+      "rot": 2.4,
+      "seeds": 6
+    },
+    {
+      "id": "chest",
+      "x": 22,
+      "z": 8,
+      "rot": -0.6,
+      "seeds": 6
+    },
+    {
+      "id": "ruin_arch",
+      "x": -4,
+      "z": -8,
+      "rot": 0.35
+    },
+    {
+      "id": "ruin_pillar",
+      "x": -12,
+      "z": -14,
+      "rot": 0.4
+    },
+    {
+      "id": "ruin_pillar",
+      "x": 14,
+      "z": -8,
+      "rot": 1.1
+    },
+    {
+      "id": "ruin_pillar",
+      "x": -20,
+      "z": 0,
+      "rot": 2.0
+    },
+    {
+      "id": "ruin_pillar",
+      "x": -5,
+      "z": -30,
+      "rot": 0.2,
+      "scale": 1.2
+    },
+    {
+      "id": "ruin_pillar",
+      "x": 5,
+      "z": -31,
+      "rot": 0.9,
+      "scale": 0.8
+    },
+    {
+      "id": "rock_large",
+      "x": 10,
+      "z": 38,
+      "rot": 0.4
+    },
+    {
+      "id": "rock_large",
+      "x": -34,
+      "z": 10,
+      "rot": 2.1,
+      "scale": 1.2
+    }
+  ],
+  "seeds": [
+    {
+      "x": -12,
+      "z": 28,
+      "count": 3
+    },
+    {
+      "x": 12,
+      "z": 33,
+      "count": 2
+    },
+    {
+      "x": -36,
+      "z": -10,
+      "count": 3
+    },
+    {
+      "x": 26,
+      "z": 16,
+      "count": 2
+    }
+  ],
+  "clearings": [
+    {
+      "x": 0,
+      "z": -32,
+      "r": 6
+    }
+  ],
+  "scatter": [
+    {
+      "id": "tree_broadleaf",
+      "count": 50,
+      "spacing": 4.5,
+      "scale": [
+        0.8,
+        1.25
+      ],
+      "cluster": 0.7,
+      "where": {
+        "heightMin": 1.0,
+        "slopeMax": 0.6
+      }
+    },
+    {
+      "id": "tree_pine",
+      "count": 28,
+      "spacing": 4,
+      "scale": [
+        0.8,
+        1.2
+      ],
+      "cluster": 0.5,
+      "where": {
+        "heightMin": 2.2,
+        "slopeMax": 0.65
+      }
+    },
+    {
+      "id": "rock_large",
+      "count": 16,
+      "spacing": 3.5,
+      "scale": [
+        0.6,
+        1.3
+      ],
+      "where": {
+        "heightMin": 0.5,
+        "slopeMax": 1.4
+      }
+    },
+    {
+      "id": "rock_small",
+      "count": 40,
+      "spacing": 1.5,
+      "scale": [
+        0.6,
+        1.4
+      ],
+      "solid": false,
+      "where": {
+        "heightMin": 0.3,
+        "slopeMax": 1.4,
+        "pathMin": 1.6
+      }
+    },
+    {
+      "id": "bush",
+      "count": 60,
+      "spacing": 2,
+      "scale": [
+        0.7,
+        1.3
+      ],
+      "solid": false,
+      "cluster": 0.5,
+      "where": {
+        "heightMin": 0.9
+      }
+    },
+    {
+      "id": "flowers",
+      "count": 160,
+      "solid": false,
+      "scale": [
+        0.8,
+        1.4
+      ],
+      "cluster": 0.8,
+      "where": {
+        "heightMin": 0.9,
+        "pathMin": 1.6
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "fence",
+  "model": "krea/Krea-2-Turbo",
+  "prompt": "A short section of rustic wooden fence with two posts and two horizontal rails. A single game prop, centered, the whole object in frame with margin, three-quarter view from slightly above, stylized cel-shaded adventure game art, hand-painted, chunky simple shapes, flat warm colours with soft painted gradients, clean readable silhouette, plain white background, even soft studio lighting, no ground, no cast shadow, no text",
+  "seed": 7,
+  "steps": 8,
+  "width": 1024,
+  "height": 1024,
+  "memory": "gguf",
+  "dtype": "fp16",
+  "gguf": "krea2_turbo-Q4_K_M.gguf",
+  "denoise_seconds": 25.52,
+  "decode_seconds": 4.45
+}

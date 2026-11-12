@@ -1,0 +1,14 @@
+{
+  "id": "ground_grass",
+  "model": "krea/Krea-2-Turbo",
+  "prompt": "Short meadow grass in warm yellow-greens with a few tiny clover leaves. Seamless tileable hand-painted game texture, top-down flat view, even lighting, no shadows, no perspective, no text",
+  "seed": 7,
+  "steps": 8,
+  "width": 1024,
+  "height": 1024,
+  "memory": "gguf",
+  "dtype": "fp16",
+  "gguf": "krea2_turbo-Q4_K_M.gguf",
+  "denoise_seconds": 25.42,
+  "decode_seconds": 4.45
+}

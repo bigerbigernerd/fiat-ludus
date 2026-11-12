@@ -1,0 +1,30 @@
+{
+ "model": "opencode-go/deepseek-v4.1-flash",
+ "turns": 2,
+ "steps": 48,
+ "tool_calls": {
+  "bash": 47,
+  "write": 3,
+  "job_watch": 1,
+  "read": 9
+ },
+ "tokens": {
+  "input": 82513,
+  "output": 7592,
+  "reasoning": 7888,
+  "cache_read": 2755200,
+  "cache_write": 0
+ },
+ "api_cost_usd": 0.0299,
+ "wall_seconds": 1890,
+ "gpu": {
+  "stage": "cost",
+  "jobs": 5,
+  "gpu_minutes": 21.9,
+  "watt_hours": 70.6,
+  "cost": 0.0106,
+  "kwh_price": 0.15
+ },
+ "check_exit": 0,
+ "report_written": true
+}

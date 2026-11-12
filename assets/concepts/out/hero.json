@@ -1,0 +1,15 @@
+{
+  "id": "hero",
+  "model": "krea/Krea-2-Turbo",
+  "prompt": "Full-body character design reference of an original young male adventurer, about eighteen years old, tall and lean with an athletic build, seven heads tall, handsome with sharp refined facial features and a calm confident look, short layered silver-white hair with a few strands over the forehead and pale blue eyes. He wears a short cropped white jacket with teal panels and a high collar; the jacket ends exactly at the waistline and is held closed by a flat red sash and a brown leather belt, a leather strap runs across the chest, dark fingerless gloves on both hands. Below the belt he wears only slim-fitting charcoal trousers, his hips and both thighs are fully visible with nothing hanging over them, and tall dark boots with silver buckles. Standing straight in an A-pose, front view facing the camera, both arms straight and lowered about 40 degrees away from the body with a clear gap between each arm and the torso, hands open and empty, legs slightly apart with a clear gap between them, feet flat, symmetrical stance, the whole figure from head to boots in frame with margin. High-quality anime-style cel-shaded game character design, clean precise line art, crisp two-tone cel shading, refined colour palette, detailed costume, plain white background, even soft studio lighting, no ground shadow, no text",
+  "seed": 11,
+  "steps": 8,
+  "width": 1024,
+  "height": 1024,
+  "memory": "gguf",
+  "dtype": "fp16",
+  "gguf": "krea2_turbo-Q4_K_M.gguf",
+  "denoise_seconds": 18.29,
+  "decode_seconds": 1.09,
+  "note": "Design B, short jacket. Rendered on the RTX 3090 with the 11 GB settings (Q4_K_M, FP16) while the 2080 Ti was busy."
+}

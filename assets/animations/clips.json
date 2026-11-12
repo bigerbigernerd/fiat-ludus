@@ -1,0 +1,11 @@
+{
+  "library": "ual_standard.glb",
+  "note": "Clip name in the exported character -> source animation(s) in the library, played back to back.",
+  "clips": {
+    "idle":   {"source": ["Idle_Loop"], "loop": true},
+    "walk":   {"source": ["Walk_Loop"], "loop": true},
+    "run":    {"source": ["Jog_Fwd_Loop"], "loop": true},
+    "jump":   {"source": ["Jump_Start", "Jump_Loop", "Jump_Land"], "loop": false},
+    "attack": {"source": ["Sword_Attack"], "loop": false}
+  }
+}
