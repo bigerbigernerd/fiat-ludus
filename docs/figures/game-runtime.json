@@ -1,0 +1,440 @@
+{
+ "stage": "measure",
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Gold 6230R CPU @ 2.10GHz",
+  "logicalCores": 52,
+  "memoryGb": 252
+ },
+ "secondsPerScenario": 60,
+ "emptyTab": {
+  "memPssMb": 263.8,
+  "gpuMemMiBAboveIdle": 33,
+  "note": "about:blank with one empty WebGL2 canvas, 1280x720"
+ },
+ "scenarios": [
+  {
+   "name": "title-720p",
+   "label": "title screen, 1280x720",
+   "viewport": "1280x720",
+   "pixelRatio": 1,
+   "mobileQuality": false,
+   "renderer": "ANGLE (NVIDIA, Vulkan 1.4.329 (NVIDIA NVIDIA GeForce RTX 2080 Ti (0x00001E07)), NVIDIA)",
+   "seconds": 60,
+   "mode": "title",
+   "errors": [],
+   "fps": 60.3,
+   "frameMs": {
+    "median": 16.7,
+    "p95": 16.7,
+    "p99": 16.8,
+    "max": 16.8
+   },
+   "drawCalls": 108,
+   "triangles": 890704,
+   "cpuCores": 0.41,
+   "cpuCoresPeak": 0.52,
+   "memPssMb": 542.3,
+   "memPssMbPeak": 546.8,
+   "memRssMb": 872.2,
+   "jsHeapMb": 17.4,
+   "gpu": {
+    "name": "NVIDIA GeForce RTX 2080 Ti",
+    "utilPct": 38.3,
+    "utilPctPeak": 40,
+    "memMiBAboveIdle": 253.9,
+    "memMiBPeakAboveIdle": 256,
+    "wattsAboveIdle": 12.3,
+    "wattsIdle": 13.6,
+    "memMiBByProcess": 252.9
+   },
+   "byProcess": {
+    "browser": {
+     "cpuCores": 0.001,
+     "memPssMb": 38.4,
+     "gpuMemMiB": 0
+    },
+    "zygote": {
+     "cpuCores": 0,
+     "memPssMb": 20.3,
+     "gpuMemMiB": 0
+    },
+    "gpu-process": {
+     "cpuCores": 0.18,
+     "memPssMb": 190,
+     "gpuMemMiB": 252.9
+    },
+    "utility:NetworkService": {
+     "cpuCores": 0,
+     "memPssMb": 24.7,
+     "gpuMemMiB": 0
+    },
+    "renderer": {
+     "cpuCores": 0.229,
+     "memPssMb": 269,
+     "gpuMemMiB": 0
+    }
+   },
+   "load": {
+    "ms": 2684,
+    "files": 26,
+    "megabytes": 9.12
+   }
+  },
+  {
+   "name": "play-720p",
+   "label": "playing, 1280x720",
+   "viewport": "1280x720",
+   "pixelRatio": 1,
+   "mobileQuality": false,
+   "renderer": "ANGLE (NVIDIA, Vulkan 1.4.329 (NVIDIA NVIDIA GeForce RTX 2080 Ti (0x00001E07)), NVIDIA)",
+   "seconds": 60,
+   "mode": "play",
+   "errors": [],
+   "fps": 60.3,
+   "frameMs": {
+    "median": 16.7,
+    "p95": 16.8,
+    "p99": 16.8,
+    "max": 16.8
+   },
+   "drawCalls": 77,
+   "triangles": 690203,
+   "cpuCores": 0.47,
+   "cpuCoresPeak": 0.62,
+   "memPssMb": 555.9,
+   "memPssMbPeak": 562.7,
+   "memRssMb": 939.1,
+   "jsHeapMb": 18.4,
+   "gpu": {
+    "name": "NVIDIA GeForce RTX 2080 Ti",
+    "utilPct": 30.6,
+    "utilPctPeak": 37,
+    "memMiBAboveIdle": 256.7,
+    "memMiBPeakAboveIdle": 262,
+    "wattsAboveIdle": 7.9,
+    "wattsIdle": 15.9,
+    "memMiBByProcess": 255.6
+   },
+   "byProcess": {
+    "browser": {
+     "cpuCores": 0.001,
+     "memPssMb": 38,
+     "gpuMemMiB": 0
+    },
+    "zygote": {
+     "cpuCores": 0,
+     "memPssMb": 18,
+     "gpuMemMiB": 0
+    },
+    "gpu-process": {
+     "cpuCores": 0.173,
+     "memPssMb": 182.8,
+     "gpuMemMiB": 255.6
+    },
+    "utility:NetworkService": {
+     "cpuCores": 0,
+     "memPssMb": 23.3,
+     "gpuMemMiB": 0
+    },
+    "renderer": {
+     "cpuCores": 0.279,
+     "memPssMb": 276,
+     "gpuMemMiB": 0
+    },
+    "utility:AudioService": {
+     "cpuCores": 0.016,
+     "memPssMb": 17.8,
+     "gpuMemMiB": 0
+    }
+   },
+   "load": {
+    "ms": 2703,
+    "files": 26,
+    "megabytes": 9.12
+   }
+  },
+  {
+   "name": "play-1080p",
+   "label": "playing, 1920x1080",
+   "viewport": "1920x1080",
+   "pixelRatio": 1,
+   "mobileQuality": false,
+   "renderer": "ANGLE (NVIDIA, Vulkan 1.4.329 (NVIDIA NVIDIA GeForce RTX 2080 Ti (0x00001E07)), NVIDIA)",
+   "seconds": 60,
+   "mode": "play",
+   "errors": [],
+   "fps": 60.3,
+   "frameMs": {
+    "median": 16.7,
+    "p95": 16.7,
+    "p99": 16.8,
+    "max": 16.8
+   },
+   "drawCalls": 77,
+   "triangles": 692880,
+   "cpuCores": 0.47,
+   "cpuCoresPeak": 0.6,
+   "memPssMb": 566,
+   "memPssMbPeak": 573.3,
+   "memRssMb": 948,
+   "jsHeapMb": 26.3,
+   "gpu": {
+    "name": "NVIDIA GeForce RTX 2080 Ti",
+    "utilPct": 27.6,
+    "utilPctPeak": 41,
+    "memMiBAboveIdle": 327.2,
+    "memMiBPeakAboveIdle": 339,
+    "wattsAboveIdle": 11.2,
+    "wattsIdle": 15.9,
+    "memMiBByProcess": 326.3
+   },
+   "byProcess": {
+    "browser": {
+     "cpuCores": 0.001,
+     "memPssMb": 37.7,
+     "gpuMemMiB": 0
+    },
+    "zygote": {
+     "cpuCores": 0,
+     "memPssMb": 18.3,
+     "gpuMemMiB": 0
+    },
+    "gpu-process": {
+     "cpuCores": 0.175,
+     "memPssMb": 191.5,
+     "gpuMemMiB": 326.3
+    },
+    "utility:NetworkService": {
+     "cpuCores": 0,
+     "memPssMb": 23,
+     "gpuMemMiB": 0
+    },
+    "renderer": {
+     "cpuCores": 0.279,
+     "memPssMb": 277.5,
+     "gpuMemMiB": 0
+    },
+    "utility:AudioService": {
+     "cpuCores": 0.015,
+     "memPssMb": 18,
+     "gpuMemMiB": 0
+    }
+   },
+   "load": {
+    "ms": 2747,
+    "files": 26,
+    "megabytes": 9.12
+   }
+  },
+  {
+   "name": "play-phone",
+   "label": "playing, phone layout 390x844 at 2x",
+   "viewport": "390x844",
+   "pixelRatio": 1.6,
+   "mobileQuality": true,
+   "renderer": "ANGLE (NVIDIA, Vulkan 1.4.329 (NVIDIA NVIDIA GeForce RTX 2080 Ti (0x00001E07)), NVIDIA)",
+   "seconds": 60,
+   "mode": "play",
+   "errors": [],
+   "fps": 60.3,
+   "frameMs": {
+    "median": 16.7,
+    "p95": 16.7,
+    "p99": 16.8,
+    "max": 16.8
+   },
+   "drawCalls": 67,
+   "triangles": 533050,
+   "cpuCores": 0.46,
+   "cpuCoresPeak": 0.63,
+   "memPssMb": 565.3,
+   "memPssMbPeak": 572.6,
+   "memRssMb": 947.4,
+   "jsHeapMb": 18.4,
+   "gpu": {
+    "name": "NVIDIA GeForce RTX 2080 Ti",
+    "utilPct": 23.4,
+    "utilPctPeak": 28,
+    "memMiBAboveIdle": 226.9,
+    "memMiBPeakAboveIdle": 234,
+    "wattsAboveIdle": 4.9,
+    "wattsIdle": 17.2,
+    "memMiBByProcess": 226
+   },
+   "byProcess": {
+    "browser": {
+     "cpuCores": 0.001,
+     "memPssMb": 37.9,
+     "gpuMemMiB": 0
+    },
+    "zygote": {
+     "cpuCores": 0,
+     "memPssMb": 18.3,
+     "gpuMemMiB": 0
+    },
+    "gpu-process": {
+     "cpuCores": 0.171,
+     "memPssMb": 191.4,
+     "gpuMemMiB": 226
+    },
+    "utility:NetworkService": {
+     "cpuCores": 0,
+     "memPssMb": 22.8,
+     "gpuMemMiB": 0
+    },
+    "renderer": {
+     "cpuCores": 0.275,
+     "memPssMb": 276.9,
+     "gpuMemMiB": 0
+    },
+    "utility:AudioService": {
+     "cpuCores": 0.016,
+     "memPssMb": 18,
+     "gpuMemMiB": 0
+    }
+   },
+   "load": {
+    "ms": 2855,
+    "files": 26,
+    "megabytes": 9.12
+   }
+  },
+  {
+   "name": "play-720p-uncapped",
+   "label": "playing, 1280x720, frame rate not capped",
+   "viewport": "1280x720",
+   "pixelRatio": 1,
+   "mobileQuality": false,
+   "renderer": "ANGLE (NVIDIA, Vulkan 1.4.329 (NVIDIA NVIDIA GeForce RTX 2080 Ti (0x00001E07)), NVIDIA)",
+   "seconds": 60,
+   "mode": "play",
+   "errors": [],
+   "fps": 1137.8,
+   "frameMs": {
+    "median": 0.7,
+    "p95": 1.6,
+    "p99": 3.4,
+    "max": 53.9
+   },
+   "drawCalls": 77,
+   "triangles": 696189,
+   "cpuCores": 3.57,
+   "cpuCoresPeak": 3.85,
+   "memPssMb": 596.2,
+   "memPssMbPeak": 605.1,
+   "memRssMb": 979,
+   "jsHeapMb": 22,
+   "gpu": {
+    "name": "NVIDIA GeForce RTX 2080 Ti",
+    "utilPct": 36.9,
+    "utilPctPeak": 80,
+    "memMiBAboveIdle": 264.2,
+    "memMiBPeakAboveIdle": 278,
+    "wattsAboveIdle": 135.5,
+    "wattsIdle": 17.5,
+    "memMiBByProcess": 262.8
+   },
+   "byProcess": {
+    "browser": {
+     "cpuCores": 0.002,
+     "memPssMb": 37.8,
+     "gpuMemMiB": 0
+    },
+    "zygote": {
+     "cpuCores": 0,
+     "memPssMb": 18.3,
+     "gpuMemMiB": 0
+    },
+    "gpu-process": {
+     "cpuCores": 2.281,
+     "memPssMb": 197.3,
+     "gpuMemMiB": 262.8
+    },
+    "utility:NetworkService": {
+     "cpuCores": 0,
+     "memPssMb": 23.1,
+     "gpuMemMiB": 0
+    },
+    "renderer": {
+     "cpuCores": 1.268,
+     "memPssMb": 301.4,
+     "gpuMemMiB": 0
+    },
+    "utility:AudioService": {
+     "cpuCores": 0.014,
+     "memPssMb": 18.3,
+     "gpuMemMiB": 0
+    }
+   },
+   "load": {
+    "ms": 2686,
+    "files": 26,
+    "megabytes": 9.12
+   }
+  },
+  {
+   "name": "play-720p-software",
+   "label": "playing, 1280x720, no GPU (software rendering)",
+   "viewport": "1280x720",
+   "pixelRatio": 1,
+   "mobileQuality": false,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "seconds": 60,
+   "mode": "play",
+   "errors": [],
+   "fps": 2.2,
+   "frameMs": {
+    "median": 416.7,
+    "p95": 783.3,
+    "p99": 949.9,
+    "max": 949.9
+   },
+   "drawCalls": 79,
+   "triangles": 702219,
+   "cpuCores": 14.64,
+   "cpuCoresPeak": 16.2,
+   "memPssMb": 721.7,
+   "memPssMbPeak": 742.5,
+   "memRssMb": 1073.7,
+   "jsHeapMb": 29.8,
+   "gpu": null,
+   "byProcess": {
+    "browser": {
+     "cpuCores": 0.001,
+     "memPssMb": 37.9,
+     "gpuMemMiB": 0
+    },
+    "zygote": {
+     "cpuCores": 0,
+     "memPssMb": 17.9,
+     "gpuMemMiB": 0
+    },
+    "gpu-process": {
+     "cpuCores": 14.556,
+     "memPssMb": 369.8,
+     "gpuMemMiB": 0
+    },
+    "utility:NetworkService": {
+     "cpuCores": 0,
+     "memPssMb": 23.3,
+     "gpuMemMiB": 0
+    },
+    "renderer": {
+     "cpuCores": 0.066,
+     "memPssMb": 255.1,
+     "gpuMemMiB": 0
+    },
+    "utility:AudioService": {
+     "cpuCores": 0.015,
+     "memPssMb": 17.7,
+     "gpuMemMiB": 0
+    }
+   },
+   "load": {
+    "ms": 5658,
+    "files": 26,
+    "megabytes": 9.12
+   }
+  }
+ ]
+}

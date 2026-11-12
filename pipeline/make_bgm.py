@@ -22,9 +22,11 @@ smaller or older cards (tested on an RTX 2080 Ti 11 GB: peak about 5.9-6.5 GB).
 
 Afterwards the script measures loudness, head/tail silence and (unless
 --no-separation) the vocal energy left in the mix using Demucs htdemucs on the
-CPU. It writes a crossfaded loop normalised to --lufs, encodes it to the format
-of --out (.ogg/.mp3/.wav/.flac) plus an MP3 sibling, and prints one JSON line.
-Exit codes: 0 ok, 1 generated but needs review (truncated), 2 failure.
+CPU, once for the whole render and once for the loop it delivers. It writes a
+crossfaded loop normalised to --lufs, encodes it to the format of --out
+(.ogg/.mp3/.wav/.flac) plus an MP3 sibling, and prints one JSON line.
+Exit codes: 0 ok, 1 generated but needs review (truncated, or an --instrumental
+loop that measures like a sung track: "vocal_check": {"voice": "likely"}), 2 failure.
 """
 from __future__ import annotations
 
@@ -308,6 +310,19 @@ def vocal_analysis(x, sr=SR, threads=16):
             "vocal_active_windows_pct": round(100 * float(active.mean()), 1) if k else None,
             "loudest_1s_vocal_to_mix_db": round(worst, 2) if worst is not None else None,
             "separation_seconds": round(time.perf_counter() - t0, 1)}, v, acc, model.samplerate
+
+
+def voice_verdict(voc) -> str:
+    """Turn the measurements into one word. Calibration in docs/logs/yue2-setup.md:
+    sung YuE2 tracks gave a vocal stem of -3 to -6 dB against the mix in 36-80 % of
+    the one-second windows; clean instrumentals gave 0 % of the windows; a flute or
+    brass lead that the separator takes for a voice gave 7-25 % at -11 dB or lower,
+    with no words."""
+    words = (voc.get("asr") or {}).get("likely_words_seconds") or 0
+    active = voc.get("vocal_active_windows_pct") or 0
+    if words >= 3 or (voc["vocal_to_mix_db"] > -9 and active >= 25):
+        return "likely"
+    return "possible" if active >= 5 else "none"
 
 
 def asr_check(vocal_stem, sr):
@@ -603,6 +618,22 @@ def run(args, report, t_start) -> int:
                       "fallback": loop["fallback"], "lufs_before": round(pre, 2), "gain_db": round(gain_db, 2),
                       "lufs": round(final_lufs, 2), "true_peak_dbtp": round(true_peak_db(body), 2)}
     report["files"] = {"audio": [str(p) for p in siblings], "work": str(work)}
+
+    if not args.no_separation:
+        # Judge the file that is delivered, not the whole render: singing after the
+        # loop's end does not matter, singing inside it does.
+        t0 = time.perf_counter()
+        loop_voc, loop_stem, _, loop_sr = vocal_analysis(body)
+        if loop_voc["vocal_active_windows_pct"] and loop_voc["vocal_active_windows_pct"] >= 5:
+            loop_voc["asr"] = asr_check(loop_stem, loop_sr)
+        report["vocal_check"]["render_voice"] = voice_verdict(report["vocal_check"])
+        report["vocal_check"]["loop"] = loop_voc
+        report["vocal_check"]["voice"] = voice_verdict(loop_voc)
+        timings["separation_s"] = round(timings["separation_s"] + time.perf_counter() - t0, 1)
+        if args.instrumental and report["vocal_check"]["voice"] == "likely":
+            status = report["status"] = "needs_review"
+            report["hint"] = ("the loop measures like a sung track (vocal_check.loop); "
+                              "listen to it, or generate again with another --seed")
     sidecar = {"prompt": args.prompt, "style_sent": style, "seed": args.seed, "mode": report["mode"],
                "render_request": request}
     if (work / "planning-request.json").is_file():

@@ -121,8 +121,11 @@ in `game/README.md`.
 ### 6. Music: `./forge music --prompt "<style>" --seconds 75 --instrumental --out game/public/assets/audio/field.ogg`
 
 Describe genre, instruments, tempo and mood. Always pass `--instrumental` for
-background music. Exit code 1 means "generated, but the piece came out shorter than
-asked or was cut off" (`"status": "needs_review"` in the JSON); try another `--seed`.
+background music. Exit code 1 means "generated, but look at it" (`"status":
+"needs_review"` in the JSON): the piece came out shorter than asked, was cut off, or
+the loop measures like a sung track (`"vocal_check": {"voice": "likely"}`). Try
+another `--seed`. `"voice": "possible"` is only a note: a flute or brass lead can
+look like a voice to the separator.
 
 ### 7. Check: `./forge check`
 
@@ -132,9 +135,12 @@ which assertions failed and writes screenshots to `game/check-output/`. The line
 `N generated assets, M placeholders` on the title screen tells you how many manifest
 entries still have no file. A placeholder is not an error; a `failed` asset is.
 
-### 8. Cost: `./forge cost`
+### 8. Cost: `./forge cost`, `./forge measure`
 
-GPU minutes, watt-hours and electricity cost per stage so far.
+`cost`: GPU minutes, watt-hours and electricity cost per stage so far. `measure`:
+plays the built game in real time for a minute per scenario and reports what it costs
+the player's machine: frame rate, CPU cores, memory, GPU load and GPU memory
+(`game/check-output/runtime.json`). Linux with an NVIDIA card only.
 
 ## When something fails
 

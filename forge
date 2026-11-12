@@ -11,6 +11,7 @@
 #   ./forge install [--from DIR] [--manifest FILE] [--only id,id]
 #   ./forge music   --prompt "..." --out file.ogg [make_bgm.py options]
 #   ./forge check                      # build the game and run its browser test
+#   ./forge measure [--seconds N]      # play the built game for a while: CPU, memory, GPU load and memory
 #   ./forge cost                       # what every GPU job so far cost
 #
 #   ./forge bg <name> <command ...>    # run any of the above in the background, log to logs/<name>.log
@@ -93,6 +94,12 @@ check)
     cd game
     [ -d node_modules ] || npm install
     npm run check
+    ;;
+measure)
+    cd game
+    [ -d node_modules ] || npm install
+    npx vite build > /dev/null
+    node scripts/measure.mjs "$@"
     ;;
 cost)
     python3 tools/cost_report.py "$@"

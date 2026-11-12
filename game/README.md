@@ -17,6 +17,7 @@ npm install          # three, vite, playwright-core (uses the browsers in ~/.cac
 npm run dev          # http://localhost:5173  (add ?debug=1 for the debug overlay)
 npm run build        # static site in dist/, relative paths, host under any sub-path
 npm run check        # build + headless verification (see below)
+npm run measure      # build + what the running game costs: fps, CPU, memory, GPU (Linux + NVIDIA)
 ```
 
 URL flags: `?debug=1` debug overlay (also toggled with the backquote key; it

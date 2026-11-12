@@ -31,7 +31,7 @@ one is only faster.
 ## Quick start
 
 ```bash
-# 1. install (no sudo needed; about 105 GB of disk; see docs/setup.md for sizes and traps)
+# 1. install (no sudo needed; about 95 GB of disk; see docs/setup.md for sizes and traps)
 setup/install_blender.sh
 setup/env_krea.sh && setup/env_trellis2.sh && setup/env_unirig.sh && setup/env_yue2.sh
 setup/download_models.sh
@@ -54,22 +54,30 @@ agents: file formats, how to judge a result, what to do when a stage fails.
 
 ## Can a cheap model drive it?
 
-We gave DeepSeek V4.1 Flash a copy of this repository and one page of task
+A frontier model (Claude Fable 5.2 with Opus sub-agents) built this pipeline, the
+game and the demo's assets. The test is whether a much cheaper model can then
+*operate* it. DeepSeek V4.1 Flash got a copy of this repository and one page of task
 ([tests/agent/task.md](tests/agent/task.md)): re-theme the demo for autumn with a new
 rigged hero, a new enemy, a new tree, a new prop placed in the level, a new sky and
 new music, and make the game's play-through test pass without touching the game's
-source. One run, no human in the loop:
+source. It did not write the game or the pipeline; it wrote prompts, settings, one
+manifest entry and eight placements, and called the tools. One run, no human in the
+loop:
 
 | | |
 |---|---|
-| Result | finished; the check passes with 23 of 23 assets loaded |
-| Time | 31.5 min wall-clock, 21.9 min of it GPU work |
-| Agent | 48 steps, 60 tool calls, $0.03 of API cost |
-| GPU | 70.6 Wh, $0.01 of electricity |
+| Result | finished; the check passed three times in a row; 22 generated assets, none a placeholder |
+| Time | 31.3 min wall-clock, 21.9 min of it GPU work |
+| Agent | 48 model steps, 60 tool calls, $0.03 of API cost |
+| GPU | 5 jobs, 70.6 Wh, $0.01 of electricity |
+| Not caught by it | a thin tree and a blotchy pumpkin, a half-painted face, music that measures like singing |
 
-![What the cheap model made: its concept images, its hero in its pumpkin patch, the first lantern under its sky](docs/figures/cheap-model-makeover.jpg)
+![Four moments of the play-through before and after the cheap model's make-over](docs/figures/agent-test-before-after.jpg)
 
-Its report, prompts and cost ledger are in
+![The run on one time axis: the agent's turns and tool calls, the GPU jobs, the CPU steps](docs/figures/agent-test-timeline.png)
+
+The complete results, with what it made, what it missed and the four defects of our
+own tools that the run exposed (all fixed), are in
 [tests/agent/results/deepseek-v4.1-flash/](tests/agent/results/deepseek-v4.1-flash/).
 `tests/agent/run.sh <model>` repeats the test with any model the `opencode` CLI can
 reach. It is one run of one task; it says nothing about how often it would succeed.
@@ -94,13 +102,39 @@ take 11 min 43 s and 37 Wh, but stone and flower colours drift, so the demo uses
 at 512 and said so in its report. Every job, including the failed experiments, is in
 `cost/ledger.jsonl`; `./forge cost` adds them up.
 
+## What it cost
+
+![What each part cost, on a log axis: the demo's assets, the cheap model's make-over, all GPU jobs of the day, the frontier-model session that built everything, and a published figure for scale](docs/figures/cost-overview.png)
+
+- The demo's assets: $0.04 of electricity. All 130 GPU jobs of the day, failed
+  experiments included: $0.15.
+- The session that built the pipeline, the game and the assets (Claude Fable 5.2 with
+  six Opus sub-agents): 1,492 model responses, 1.7 million output tokens, 419 million
+  tokens read from cache, about $175 at API list prices. It ran on a subscription, so
+  that is a list-price equivalent, not a bill. Data: `cost/agent-tokens.json`.
+- The cheap model's make-over: $0.03 of tokens and $0.01 of electricity.
+
+The full analysis, figure by figure, is in [docs/cost-analysis.md](docs/cost-analysis.md).
+
+## What the running game needs
+
+![Frame rate, CPU, memory, GPU load and GPU memory of the running game in six scenarios](docs/figures/game-runtime.png)
+
+In a desktop browser at 60 frames per second on the RTX 2080 Ti: half a CPU core,
+about 560 MB of memory (an empty tab of the same browser takes 260), 31 % of the card
+and 257 MiB of its memory. With the frame-rate cap removed it reaches about 1,100
+frames per second; with software rendering, 2. `./forge measure` repeats the
+measurement (Linux with an NVIDIA card); real phones and integrated graphics were not
+measured.
+
 ## Requirements
 
 - Linux and an NVIDIA GPU with 11 GB or more (tested: RTX 2080 Ti and RTX 3090).
 - RAM: the pipeline keeps sub-models in RAM and moves them to the GPU one at a
   time, so plan for 32 GB or more. That figure is an estimate; the machine we used
   has much more and RAM use was not measured.
-- About 105 GB of disk for environments and weights.
+- About 95 GB of disk for environments and weights, plus up to 26 GB of package cache
+  while installing.
 - No root access and no system CUDA toolkit: every environment brings its own.
 - A Hugging Face account that has accepted the Krea 2 Turbo licence.
 
