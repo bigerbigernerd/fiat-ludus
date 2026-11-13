@@ -36,6 +36,7 @@ What building the pipeline and the game cost is in [docs/cost-analysis.md](../..
 | Failed jobs, regenerated assets | 0, 0 |
 | Game afterwards | 22 generated assets, none a placeholder |
 | Quality problems it did not catch | a thin tree and a blotchy pumpkin, a half-painted face, music that measures like singing |
+| Play it | [fiat-ludus.pocketplay.win/autumn/](https://fiat-ludus.pocketplay.win/autumn/): its build as it left it; only the page title and link preview were added |
 
 ![The run on one time axis: the agent's two turns, its 60 tool calls, the five GPU jobs and the CPU-only steps](../../../../docs/figures/agent-test-timeline.png)
 

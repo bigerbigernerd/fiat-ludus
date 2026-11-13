@@ -5,6 +5,10 @@ poncho and red scarf, lands on a meadow island where three stone wind-lanterns
 have gone dark. Clear the mosslings guarding each lantern, light all three, and
 walk through the north gate. A run takes 2 to 5 minutes.
 
+Play it online: [this build](https://fiat-ludus.pocketplay.win/), and
+[the cheap model's autumn make-over](https://fiat-ludus.pocketplay.win/autumn/)
+(see `tests/agent/results/`).
+
 The game is fully playable with built-in placeholder shapes. Every external asset
 (models, sky, music) is listed in `public/assets/manifest.json`; when a listed
 file exists and loads, it replaces its placeholder automatically. The game never
